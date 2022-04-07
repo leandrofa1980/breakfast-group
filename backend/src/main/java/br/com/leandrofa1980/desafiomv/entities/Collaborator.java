@@ -3,7 +3,7 @@ package br.com.leandrofa1980.desafiomv.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.annotation.Generated;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +18,10 @@ public class Collaborator implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
+	
+	@Column(unique = true)
 	private String cpf;
 	
 	public Collaborator() {}
