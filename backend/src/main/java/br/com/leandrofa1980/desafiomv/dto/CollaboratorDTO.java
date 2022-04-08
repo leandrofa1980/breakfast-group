@@ -1,12 +1,21 @@
 package br.com.leandrofa1980.desafiomv.dto;
 
-import br.com.leandrofa1980.desafiomv.entities.Collaborator;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-public class CollaboratorDTO {
+import br.com.leandrofa1980.desafiomv.entities.Collaborator;
+import br.com.leandrofa1980.desafiomv.entities.Option;
+
+public class CollaboratorDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	private String name;
 	private String cpf;
+	
+	private List<OptionDTO> options = new ArrayList<>();
 	
 	public CollaboratorDTO() {}
 
@@ -22,6 +31,10 @@ public class CollaboratorDTO {
 		this.cpf = entity.getCpf();
 	}
 	
+	public CollaboratorDTO(Collaborator entity, Set<Option> options) {
+		this(entity);
+		options.forEach(opt -> this.options.add(new OptionDTO(opt)));
+	}
 
 	public Long getId() {
 		return id;
@@ -45,5 +58,13 @@ public class CollaboratorDTO {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}	
+
+	public List<OptionDTO> getOptions() {
+		return options;
 	}
+
+	public void setOptions(List<OptionDTO> options) {
+		this.options = options;
+	}	
 }

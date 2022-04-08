@@ -1,30 +1,42 @@
 package br.com.leandrofa1980.desafiomv.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_collaborator")
 public class Collaborator implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String name;
-	
+
 	@Column(unique = true)
 	private String cpf;
-	
-	public Collaborator() {}
+
+	@ManyToMany
+	@JoinTable(name = "tb_collaborator_option",
+			joinColumns = @JoinColumn(name = "collaborator_id"), 
+			inverseJoinColumns = @JoinColumn(name = "option_id"))
+	Set<Option> options = new HashSet<>();
+
+	public Collaborator() {
+	}
 
 	public Collaborator(Long id, String name, String cpf) {
 		this.id = id;
@@ -54,6 +66,11 @@ public class Collaborator implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+
+	public Set<Option> getOptions() {
+		return options;
 	}
 
 	@Override
