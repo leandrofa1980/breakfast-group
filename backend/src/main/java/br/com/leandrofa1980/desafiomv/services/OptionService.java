@@ -1,22 +1,22 @@
 package br.com.leandrofa1980.desafiomv.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.leandrofa1980.desafiomv.dto.OptionDTO;
 import br.com.leandrofa1980.desafiomv.entities.Option;
 import br.com.leandrofa1980.desafiomv.repositories.OptionRepository;
-import br.com.leandrofa1980.desafiomv.services.exception.OptionNotFoundException;
 import br.com.leandrofa1980.desafiomv.services.exception.DatabaseException;
+import br.com.leandrofa1980.desafiomv.services.exception.OptionNotFoundException;
 
 @Service
 public class OptionService {
@@ -25,9 +25,9 @@ public class OptionService {
 	private OptionRepository repository;
 
 	@Transactional(readOnly = true)
-	public Page<OptionDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Option> list = repository.findAll(pageRequest);
-		return list.map(x -> new OptionDTO(x));
+	public List<OptionDTO> findAll() {
+		List<Option> list = repository.findAll();
+		return list.stream().map(x -> new OptionDTO(x)).collect(Collectors.toList());
 	}
 
 	@Transactional(readOnly = true)
