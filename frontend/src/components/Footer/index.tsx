@@ -5,7 +5,7 @@ export const Footer = () => {
         <p className="text-light">
           App desenvolvido por{" "}
           <a
-            href="https://github.com/leandrofa1980"
+            href="https://github.com/leandrofa1980/breakfast-group"
             target="_blank"
             rel="noreferrer"
           >
