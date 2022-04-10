@@ -29,8 +29,8 @@ const List = () => {
       <div className="container col-sm-8">
         <div className="jumbotron">
           <h1 className="text-primary display-6">Participantes</h1>
-          <DataTable />
         </div>
+        <DataTable />
       </div>
       <Footer />
     </>
