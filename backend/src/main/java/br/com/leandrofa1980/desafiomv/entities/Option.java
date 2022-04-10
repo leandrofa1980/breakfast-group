@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +23,10 @@ public class Option implements Serializable {
 
 	@Column(unique = true)
 	private String breakfastChoice;
+	
+	@ManyToOne
+	@JoinColumn(name = "collaborator_id")
+	private Collaborator collaborator;
 	
 	public Option() {
 	}
@@ -44,6 +50,10 @@ public class Option implements Serializable {
 
 	public void setBreakfastChoice(String breakfastChoice) {
 		this.breakfastChoice = breakfastChoice;
+	}
+
+	public Collaborator getCollaboratorDTO() {
+		return collaborator;
 	}
 
 	@Override

@@ -1,18 +1,16 @@
 package br.com.leandrofa1980.desafiomv.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,17 +21,19 @@ public class Collaborator implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String name;
 
 	@Column(unique = true)
 	private String cpf;
+	
+	@OneToMany(mappedBy = "collaborator")
+	private List<Option> options = new ArrayList<>();
 
-	@ManyToMany
-	@JoinTable(name = "tb_collaborator_option",
-			joinColumns = @JoinColumn(name = "collaborator_id"), 
-			inverseJoinColumns = @JoinColumn(name = "option_id"))
-	Set<Option> options = new HashSet<>();
+	//@ManyToMany
+	//@JoinTable(name = "tb_collaborator_option",
+	//		joinColumns = @JoinColumn(name = "collaborator_id"), 
+	//		inverseJoinColumns = @JoinColumn(name = "option_id"))
+	//Set<Option> options = new HashSet<>();
 
 	public Collaborator() {
 	}
@@ -68,10 +68,13 @@ public class Collaborator implements Serializable {
 		this.cpf = cpf;
 	}
 	
-
-	public Set<Option> getOptions() {
-		return options;
+	public List<Option> getOptions(){
+		return options;		
 	}
+
+	//public Set<Option> getOptions() {
+	//	return options;
+	//}
 
 	@Override
 	public int hashCode() {
