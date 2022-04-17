@@ -4,32 +4,29 @@ import java.io.Serializable;
 
 import br.com.leandrofa1980.desafiomv.entities.Collaborator;
 
-public class CollaboratorDTO implements Serializable {
+public class CollaboratorDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
-
+	
 	private Long id;
 	private String name;
 	private String cpf;
+	private String breakfastChoice;
+	
+	public CollaboratorDTO() {}
 
-	public CollaboratorDTO() {
-	}
-
-	public CollaboratorDTO(Long id, String name, String cpf) {
+	public CollaboratorDTO(Long id, String name, String cpf, String breakfastChoice) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
+		this.breakfastChoice = breakfastChoice;
 	}
-
+	
 	public CollaboratorDTO(Collaborator entity) {
 		id = entity.getId();
 		name = entity.getName();
 		cpf = entity.getCpf();
+		breakfastChoice = entity.getBreakfastChoice();
 	}
-
-//	public CollaboratorDTO(Collaborator entity, Set<Option> options) {
-//		this(entity);
-//		options.forEach(opt -> this.options.add(new OptionDTO(opt)));
-//	}
 
 	public Long getId() {
 		return id;
@@ -53,5 +50,13 @@ public class CollaboratorDTO implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getBreakfastChoice() {
+		return breakfastChoice;
+	}
+
+	public void setBreakfastChoice(String breakfastChoice) {
+		this.breakfastChoice = breakfastChoice;
 	}
 }

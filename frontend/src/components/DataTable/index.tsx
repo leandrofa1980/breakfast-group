@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { OptionPage } from "types/option";
+import { CollaboratorPage } from "types/collaborator";
 import { BASE_URL } from "utils/requests";
 
 const DataTable = () => {
-  const [page, setPage] = useState<OptionPage>({
+  const [page, setPage] = useState<CollaboratorPage>({
     first: true,
     last: true,
     number: 0,
@@ -15,7 +15,7 @@ const DataTable = () => {
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/options?page=0&linesPerPage=3&direction=ASC&orderBy=name`
+        `${BASE_URL}/collaborators?page=0&linesPerPage=8&direction=ASC&orderBy=name`
       )
       .then((response) => {
         setPage(response.data);
@@ -34,7 +34,7 @@ const DataTable = () => {
           <tbody>
             {page.content?.map((item) => (
               <tr key={item.id}>
-                <td>{item.collaboratorDTO.name}</td>
+                <td>{item.name}</td>
                 <td>{item.breakfastChoice}</td>
               </tr>
             ))}

@@ -1,8 +1,6 @@
 package br.com.leandrofa1980.desafiomv.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,40 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_collaborator")
-public class Collaborator implements Serializable {
+public class Collaborator implements Serializable{
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-
+	
 	@Column(unique = true)
 	private String cpf;
 	
-	@OneToMany(mappedBy = "collaborator")
-	private List<Option> options = new ArrayList<>();
+	@Column(unique = true)
+	private String breakfastChoice;
+	
+	public Collaborator() {}
 
-	//@ManyToMany
-	//@JoinTable(name = "tb_collaborator_option",
-	//		joinColumns = @JoinColumn(name = "collaborator_id"), 
-	//		inverseJoinColumns = @JoinColumn(name = "option_id"))
-	//Set<Option> options = new HashSet<>();
-
-	public Collaborator() {
-	}
-
-	public Collaborator(Long id, String name, String cpf) {
+	public Collaborator(Long id, String name, String cpf, String breakfastChoice) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
+		this.breakfastChoice = breakfastChoice;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -67,14 +59,14 @@ public class Collaborator implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	public List<Option> getOptions(){
-		return options;		
+
+	public String getBreakfastChoice() {
+		return breakfastChoice;
 	}
 
-	//public Set<Option> getOptions() {
-	//	return options;
-	//}
+	public void setBreakfastChoice(String breakfastChoice) {
+		this.breakfastChoice = breakfastChoice;
+	}
 
 	@Override
 	public int hashCode() {
